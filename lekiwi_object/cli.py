@@ -57,6 +57,8 @@ def _print_human(result: Any) -> None:
     print(f"  backend: {result.execution.backend}")
     print(f"  accepted: {result.execution.accepted}")
     print(f"  message: {result.execution.message}")
+    print(f"  safety_status: {result.execution.safety_review.status.value}")
+    print(f"  safety_violations: {result.execution.safety_review.violations}")
     print("Task State:")
     print(f"  status: {result.task_state.status.value}")
     print(f"  message: {result.task_state.message}")

@@ -40,6 +40,7 @@ The initial skeleton is intentionally conservative:
 - `lekiwi_object.vision_backends` defines the backend contract for future camera/VLM work.
 - `lekiwi_object.agents.vision_agent` reads simulated observations, with room for camera/VLM backends.
 - `lekiwi_object.agents.control_agent` maps intents to safe dry-run control commands.
+- `lekiwi_object.control_safety` reviews commands before backend execution.
 - `lekiwi_object.backends` records dry-run commands locally and blocks live execution in offline mode.
 - `lekiwi_object.tools.check_ssh` verifies Raspberry Pi SSH reachability without storing credentials.
 
@@ -52,8 +53,9 @@ The initial skeleton is intentionally conservative:
 5. Stage 4: SSH and LeKiwi host startup checklist.
 6. Stage 5: vision backend interface for future camera/VLM integration.
 7. Stage 6: camera source privacy policy and Raspberry Pi USB camera boundary.
-8. Stage 7: local text command workflow with real LeKiwi observation stream.
-9. Stage 8: microphone ASR and TTS.
-10. Stage 9: visual recognition and target tracking.
-11. Stage 10: safe object touch primitive.
-12. Stage 11: demo polish and robustness.
+8. Stage 7: control safety layer for backend execution.
+9. Stage 8: local text command workflow with real LeKiwi observation stream.
+10. Stage 9: microphone ASR and TTS.
+11. Stage 10: visual recognition and target tracking.
+12. Stage 11: safe object touch primitive.
+13. Stage 12: demo polish and robustness.

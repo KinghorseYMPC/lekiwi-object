@@ -77,7 +77,19 @@ Acceptance:
 - `raspberry_pi_usb` is documented as the future robot-side camera source.
 - Vision metadata records `opens_laptop_camera = false`.
 
-## Stage 7: Observation Stream
+## Stage 7: Control Safety Layer
+
+Goal: align the mechanical control agent with `guideline.md` while preventing unsafe backend execution.
+
+Acceptance:
+
+- A `ControlSafetyLayer` reviews commands before any backend execution.
+- Commands over speed or duration limits are rejected.
+- Live commands are rejected while dry-run safety is enabled.
+- Live guarded touch is blocked until explicit hardware-stage approval.
+- Execution output includes safety status and violations.
+
+## Stage 8: Observation Stream
 
 Goal: receive front/wrist camera frames and robot state on the laptop.
 
@@ -87,7 +99,7 @@ Acceptance:
 - A local script prints state keys and frame sizes.
 - Dry-run commands remain the default.
 
-## Stage 8: Real Voice Interaction
+## Stage 9: Real Voice Interaction
 
 Goal: replace text input with microphone ASR and spoken replies.
 
@@ -97,7 +109,7 @@ Acceptance:
 - The system can reply by TTS.
 - Text mode remains available for debugging.
 
-## Stage 9: Vision Recognition And Tracking
+## Stage 10: Vision Recognition And Tracking
 
 Goal: support scene description and target centering.
 
@@ -107,7 +119,7 @@ Acceptance:
 - "看我的电脑屏幕" tracks a selected object in the wrist camera.
 - Tracking commands are rate-limited and safe.
 
-## Stage 10: Object Touch
+## Stage 11: Object Touch
 
 Goal: implement a cautious touch primitive for one selected object class.
 

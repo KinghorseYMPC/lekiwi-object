@@ -25,6 +25,7 @@ Vision agent:
 Mechanical control agent:
 
 - Current local implementation: `DryRunControlAgent`
+- Current safety implementation: `ControlSafetyLayer`
 - Current capability: safe command planning for no-motion, target centering, stop, and blocked touch.
 - Next capability: LeKiwi ZMQ client backend after SSH/host verification.
 

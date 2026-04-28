@@ -16,4 +16,12 @@ def test_dry_run_backend_rejects_live_command():
     command = ControlCommand(name="center_target", parameters={"theta.vel": 1.0}, dry_run=False)
     execution = backend.execute(command)
     assert execution.accepted is False
-    assert "rejected" in execution.message
+    assert "safety" in execution.message
+
+
+def test_dry_run_backend_rejects_over_limit_command():
+    backend = DryRunRobotBackend()
+    command = ControlCommand(name="center_target", parameters={"theta.vel": 999.0}, dry_run=True)
+    execution = backend.execute(command)
+    assert execution.accepted is False
+    assert "theta.vel" in execution.safety_review.violations[0]

@@ -47,6 +47,23 @@ Expected metadata includes:
 - `camera_source: offline_world`
 - `opens_laptop_camera: false`
 
+## Skill: Control Safety
+
+Before adding any future live robot backend, route every command through `ControlSafetyLayer`.
+
+The current offline checks reject:
+
+- live commands while `safety.dry_run` is enabled;
+- linear or angular velocities beyond config limits;
+- durations beyond `max_action_duration_s`;
+- live `guarded_touch` commands before explicit hardware-stage approval.
+
+Useful check:
+
+```bash
+python -m lekiwi_object.cli --text "停下" --dry-run --json
+```
+
 ## Skill: Offline Simulation
 
 Use this while SSH or hardware is unavailable:
@@ -65,6 +82,7 @@ Expected result:
 - each workflow result includes the chosen function call and task state;
 - vision observations include the active `vision_backend`;
 - vision observations show `opens_laptop_camera: false`;
+- execution output includes safety review status and violations;
 - execution backend is `dry_run`, meaning no SSH and no robot motion.
 
 ## Skill: Raspberry Pi SSH Check

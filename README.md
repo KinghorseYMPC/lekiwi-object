@@ -24,6 +24,7 @@ Implemented in this initial stage:
 - camera source policy that forbids laptop camera use;
 - simulated vision observations and a multi-step offline world;
 - dry-run control command generation;
+- centralized control safety layer for speed, duration, live-motion, and guarded-touch checks;
 - dry-run robot backend that records commands without SSH or robot motion;
 - SSH reachability checker for the Raspberry Pi;
 - project-level git setup plan.
@@ -54,6 +55,7 @@ The output also shows:
 - the current task state;
 - the dry-run execution backend result.
 - the simulated speech-synthesis output.
+- the control safety review status and violations.
 
 Run a local closed-loop tracking simulation:
 
@@ -115,6 +117,7 @@ This repository can make useful progress without real SSH:
 - replaceable vision backend wiring for future camera/VLM integration;
 - camera source policy for offline, sample-file, or Raspberry Pi USB cameras only;
 - safety rules and dry-run command execution;
+- centralized command safety review before backend execution;
 - tests and GitHub collaboration.
 
 Real SSH or hardware is still required for:
@@ -175,8 +178,9 @@ python -m lekiwi_object.cli --text "看一下桌面" --dry-run
 5. Stage 4: SSH check and documented Pi host startup.
 6. Stage 5: vision backend interface for future camera/VLM integration.
 7. Stage 6: camera source privacy policy and Raspberry Pi USB camera boundary.
-8. Stage 7: LeKiwi client observation stream on laptop.
-9. Stage 8: real microphone ASR and TTS.
-10. Stage 9: visual recognition and target tracking.
-11. Stage 10: cautious object-touch primitive.
-12. Stage 11: demo script, logging, and robustness pass.
+8. Stage 7: control safety layer for backend execution.
+9. Stage 8: LeKiwi client observation stream on laptop.
+10. Stage 9: real microphone ASR and TTS.
+11. Stage 10: visual recognition and target tracking.
+12. Stage 11: cautious object-touch primitive.
+13. Stage 12: demo script, logging, and robustness pass.

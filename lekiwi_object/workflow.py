@@ -5,6 +5,7 @@ from lekiwi_object.agents.vision_agent import SimulatedVisionAgent
 from lekiwi_object.agents.voice_agent import TextVoiceAgent
 from lekiwi_object.backends import DryRunRobotBackend, RobotBackend
 from lekiwi_object.config import AppConfig
+from lekiwi_object.control_safety import ControlSafetyLayer
 from lekiwi_object.function_calling import FunctionRouter
 from lekiwi_object.models import IntentType, WorkflowResult, WorkflowTrace
 from lekiwi_object.simulation import OfflineWorld
@@ -30,7 +31,7 @@ class MultiAgentWorkflow:
         self.vision = SimulatedVisionAgent(self.vision_backend)
         self.control = DryRunControlAgent(config.safety)
         self.task_state = TaskStateTracker()
-        self.robot_backend = robot_backend or DryRunRobotBackend()
+        self.robot_backend = robot_backend or DryRunRobotBackend(safety=ControlSafetyLayer(config.safety))
 
     def run_text(self, text: str) -> WorkflowResult:
         return self.run_text_loop(text, steps=1).final

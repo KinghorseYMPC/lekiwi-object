@@ -14,6 +14,7 @@ This stage intentionally avoids real SSH and hardware motion.
 - Simulated vision observations with image-space target boxes.
 - Closed-loop tracking simulation.
 - Safety-limited control command generation.
+- Centralized control safety review.
 - Dry-run command execution backend.
 - Tests that run on a teammate's laptop after cloning from GitHub.
 
@@ -67,6 +68,7 @@ python -m pytest -q -p no:cacheprovider
 - `OfflineVisionBackend` adapts `OfflineWorld` to the vision-agent contract.
 - `SimulatedVisionAgent` turns world state into observations.
 - `DryRunControlAgent` turns observations into safe commands.
+- `ControlSafetyLayer` rejects commands that exceed configured limits or attempt unsafe live motion.
 - `DryRunRobotBackend` records commands and never contacts the Pi.
 - `TaskStateTracker` summarizes progress for user-facing feedback.
 - `MultiAgentWorkflow.run_text_loop(..., steps=N)` links these pieces into a local feedback loop.

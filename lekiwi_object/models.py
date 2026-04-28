@@ -31,6 +31,11 @@ class TaskStatus(str, Enum):
     FAILED = "failed"
 
 
+class SafetyStatus(str, Enum):
+    ACCEPTED = "accepted"
+    REJECTED = "rejected"
+
+
 @dataclass(frozen=True)
 class SpeechInput:
     transcript: str
@@ -78,6 +83,17 @@ class ControlCommand:
     parameters: dict[str, float | str | bool | None]
     dry_run: bool = True
     reason: str = ""
+
+
+@dataclass(frozen=True)
+class SafetyReview:
+    status: SafetyStatus
+    violations: tuple[str, ...] = ()
+    reviewed_command_name: str = ""
+
+    @property
+    def accepted(self) -> bool:
+        return self.status == SafetyStatus.ACCEPTED
 
 
 @dataclass(frozen=True)
