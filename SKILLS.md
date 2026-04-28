@@ -42,6 +42,7 @@ Expected result:
 - mock ASR and mock TTS fields appear in CLI JSON output;
 - touch commands remain blocked unless calibration is explicitly modeled;
 - each workflow result includes the chosen function call and task state;
+- vision observations include the active `vision_backend`;
 - execution backend is `dry_run`, meaning no SSH and no robot motion.
 
 ## Skill: Raspberry Pi SSH Check

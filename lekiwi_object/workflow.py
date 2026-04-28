@@ -10,6 +10,7 @@ from lekiwi_object.models import IntentType, WorkflowResult, WorkflowTrace
 from lekiwi_object.simulation import OfflineWorld
 from lekiwi_object.speech_io import MockSpeechIO, SpeechIO
 from lekiwi_object.task_state import TaskStateTracker
+from lekiwi_object.vision_backends import OfflineVisionBackend, VisionBackend
 
 
 class MultiAgentWorkflow:
@@ -18,13 +19,15 @@ class MultiAgentWorkflow:
         config: AppConfig,
         robot_backend: RobotBackend | None = None,
         speech_io: SpeechIO | None = None,
+        vision_backend: VisionBackend | None = None,
     ):
         self.config = config
         self.world = OfflineWorld(config.simulation)
         self.speech_io = speech_io or MockSpeechIO(config.voice)
         self.voice = TextVoiceAgent()
         self.router = FunctionRouter()
-        self.vision = SimulatedVisionAgent(config.vision, self.world)
+        self.vision_backend = vision_backend or OfflineVisionBackend(config.vision, self.world)
+        self.vision = SimulatedVisionAgent(self.vision_backend)
         self.control = DryRunControlAgent(config.safety)
         self.task_state = TaskStateTracker()
         self.robot_backend = robot_backend or DryRunRobotBackend()

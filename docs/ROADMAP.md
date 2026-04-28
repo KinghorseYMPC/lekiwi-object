@@ -54,7 +54,18 @@ Acceptance:
 - Pi host startup command is documented.
 - No password or secret is stored in git.
 
-## Stage 5: Observation Stream
+## Stage 5: Vision Backend Interface
+
+Goal: keep the vision agent aligned with `guideline.md` while making perception backends replaceable.
+
+Acceptance:
+
+- A `VisionBackend` contract exists.
+- The offline world is exposed through `OfflineVisionBackend`.
+- Workflow can receive a custom vision backend later without changing the voice/control loop.
+- Tests cover backend delegation and metadata.
+
+## Stage 6: Observation Stream
 
 Goal: receive front/wrist camera frames and robot state on the laptop.
 
@@ -64,7 +75,7 @@ Acceptance:
 - A local script prints state keys and frame sizes.
 - Dry-run commands remain the default.
 
-## Stage 6: Real Voice Interaction
+## Stage 7: Real Voice Interaction
 
 Goal: replace text input with microphone ASR and spoken replies.
 
@@ -74,7 +85,7 @@ Acceptance:
 - The system can reply by TTS.
 - Text mode remains available for debugging.
 
-## Stage 7: Vision Recognition And Tracking
+## Stage 8: Vision Recognition And Tracking
 
 Goal: support scene description and target centering.
 
@@ -84,7 +95,7 @@ Acceptance:
 - "看我的电脑屏幕" tracks a selected object in the wrist camera.
 - Tracking commands are rate-limited and safe.
 
-## Stage 8: Object Touch
+## Stage 9: Object Touch
 
 Goal: implement a cautious touch primitive for one selected object class.
 

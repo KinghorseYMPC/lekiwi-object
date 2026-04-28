@@ -16,6 +16,8 @@ Voice interaction agent:
 Vision agent:
 
 - Current local implementation: `SimulatedVisionAgent` plus `OfflineWorld`
+- Current backend contract: `VisionBackend`
+- Current backend implementation: `OfflineVisionBackend`
 - Current capability: scene description, target bounding boxes, target offsets, touch target metadata.
 - Next capability: real camera frames and VLM/object detection.
 

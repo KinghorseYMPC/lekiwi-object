@@ -35,6 +35,7 @@ The initial skeleton is intentionally conservative:
 - `lekiwi_object.function_calling` converts voice intent into explicit function calls.
 - `lekiwi_object.task_state` tracks whether a task is running, completed, or blocked.
 - `lekiwi_object.simulation` provides an offline world for multi-step tracking tests.
+- `lekiwi_object.vision_backends` defines the backend contract for future camera/VLM work.
 - `lekiwi_object.agents.vision_agent` reads simulated observations, with room for camera/VLM backends.
 - `lekiwi_object.agents.control_agent` maps intents to safe dry-run control commands.
 - `lekiwi_object.backends` records dry-run commands locally and blocks live execution in offline mode.
@@ -47,8 +48,9 @@ The initial skeleton is intentionally conservative:
 3. Stage 2: function calls and task state.
 4. Stage 3: local speech I/O interface with mock ASR/TTS.
 5. Stage 4: SSH and LeKiwi host startup checklist.
-6. Stage 5: local text command workflow with real LeKiwi observation stream.
-7. Stage 6: microphone ASR and TTS.
-8. Stage 7: visual recognition and target tracking.
-9. Stage 8: safe object touch primitive.
-10. Stage 9: demo polish and robustness.
+6. Stage 5: vision backend interface for future camera/VLM integration.
+7. Stage 6: local text command workflow with real LeKiwi observation stream.
+8. Stage 7: microphone ASR and TTS.
+9. Stage 8: visual recognition and target tracking.
+10. Stage 9: safe object touch primitive.
+11. Stage 10: demo polish and robustness.

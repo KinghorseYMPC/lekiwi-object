@@ -9,6 +9,7 @@ This stage intentionally avoids real SSH and hardware motion.
 - Intent routing for chat, scene description, tracking, touch, and stop.
 - Explicit function calls from voice intent to agent capabilities.
 - Task state tracking for running, completed, and blocked workflows.
+- Replaceable vision backend interface.
 - Simulated vision observations with image-space target boxes.
 - Closed-loop tracking simulation.
 - Safety-limited control command generation.
@@ -60,6 +61,8 @@ python -m pytest -q -p no:cacheprovider
 - `OfflineWorld` owns simulated target positions.
 - `MockSpeechIO` provides local mock ASR/TTS without microphone or speaker access.
 - `FunctionRouter` turns parsed voice intent into workflow calls.
+- `VisionBackend` defines the future camera/VLM integration point.
+- `OfflineVisionBackend` adapts `OfflineWorld` to the vision-agent contract.
 - `SimulatedVisionAgent` turns world state into observations.
 - `DryRunControlAgent` turns observations into safe commands.
 - `DryRunRobotBackend` records commands and never contacts the Pi.

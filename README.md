@@ -20,6 +20,7 @@ Implemented in this initial stage:
 - fuzzy text intent routing for Chinese commands;
 - explicit function calls from voice-agent intent to vision/control tasks;
 - task states for running, completed, and blocked workflows;
+- replaceable vision backend interface for scene understanding and tracking;
 - simulated vision observations and a multi-step offline world;
 - dry-run control command generation;
 - dry-run robot backend that records commands without SSH or robot motion;
@@ -110,6 +111,7 @@ This repository can make useful progress without real SSH:
 - task status tracking for closed-loop progress;
 - simulated scene recognition;
 - simulated target tracking;
+- replaceable vision backend wiring for future camera/VLM integration;
 - safety rules and dry-run command execution;
 - tests and GitHub collaboration.
 
@@ -151,8 +153,9 @@ python -m lekiwi_object.cli --text "看一下桌面" --dry-run
 3. Stage 2: function calls and task state.
 4. Stage 3: offline speech I/O with mock ASR/TTS.
 5. Stage 4: SSH check and documented Pi host startup.
-6. Stage 5: LeKiwi client observation stream on laptop.
-7. Stage 6: real microphone ASR and TTS.
-8. Stage 7: visual recognition and target tracking.
-9. Stage 8: cautious object-touch primitive.
-10. Stage 9: demo script, logging, and robustness pass.
+6. Stage 5: vision backend interface for future camera/VLM integration.
+7. Stage 6: LeKiwi client observation stream on laptop.
+8. Stage 7: real microphone ASR and TTS.
+9. Stage 8: visual recognition and target tracking.
+10. Stage 9: cautious object-touch primitive.
+11. Stage 10: demo script, logging, and robustness pass.
