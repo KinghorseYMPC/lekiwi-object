@@ -36,6 +36,10 @@ class VisionConfig:
 @dataclass(frozen=True)
 class VoiceConfig:
     backend: str = "text"
+    asr_backend: str = "mock_asr"
+    tts_backend: str = "mock_tts"
+    require_wake_word: bool = False
+    wake_words: tuple[str, ...] = ("lekiwi", "小车", "机器人")
 
 
 @dataclass(frozen=True)

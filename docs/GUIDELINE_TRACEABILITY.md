@@ -9,7 +9,8 @@ This file maps the local implementation to the requirements in `guideline.md`.
 Voice interaction agent:
 
 - Current local implementation: `TextVoiceAgent`
-- Current capability: parses Chinese text commands as a stand-in for speech recognition.
+- Current local I/O: `MockSpeechIO`
+- Current capability: mock ASR, Chinese command parsing, reply text generation, mock TTS output.
 - Next capability: microphone ASR, response generation, and TTS.
 
 Vision agent:
@@ -28,8 +29,8 @@ Mechanical control agent:
 
 Voice interaction:
 
-- Current status: text-mode local proxy exists.
-- Verification: `python -m lekiwi_object.cli --text "你好" --dry-run`
+- Current status: text-mode local proxy plus mock ASR/TTS exists.
+- Verification: `python -m lekiwi_object.cli --text "小车，看一下桌面" --dry-run --json`
 - Remaining: real ASR and TTS.
 
 Visual scene recognition:

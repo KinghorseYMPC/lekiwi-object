@@ -32,6 +32,23 @@ class TaskStatus(str, Enum):
 
 
 @dataclass(frozen=True)
+class SpeechInput:
+    transcript: str
+    backend: str
+    confidence: float = 1.0
+    wake_detected: bool = True
+    raw_input: str = ""
+
+
+@dataclass(frozen=True)
+class SpeechOutput:
+    text: str
+    backend: str
+    audio_ref: str | None = None
+    played: bool = False
+
+
+@dataclass(frozen=True)
 class Intent:
     type: IntentType
     target: str | None = None
@@ -73,12 +90,14 @@ class TaskState:
 
 @dataclass(frozen=True)
 class WorkflowResult:
+    speech_input: SpeechInput
     intent: Intent
     function_call: FunctionCall
     observation: VisionObservation
     command: ControlCommand
     execution: Any
     task_state: TaskState
+    speech_output: SpeechOutput
     response: str
     step_index: int = 0
 

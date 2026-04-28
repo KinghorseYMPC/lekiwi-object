@@ -16,7 +16,11 @@
     "default_target": "电脑屏幕"
   },
   "voice": {
-    "backend": "text"
+    "backend": "text",
+    "asr_backend": "mock_asr",
+    "tts_backend": "mock_tts",
+    "require_wake_word": false,
+    "wake_words": ["lekiwi", "小车", "机器人"]
   },
   "simulation": {
     "image_width": 640,

@@ -15,6 +15,7 @@ This repository starts with a safe laptop-side skeleton. It runs in dry-run mode
 Implemented in this initial stage:
 
 - project docs for future Codex sessions;
+- offline speech I/O structure with mock ASR and mock TTS;
 - local multi-agent workflow skeleton;
 - fuzzy text intent routing for Chinese commands;
 - explicit function calls from voice-agent intent to vision/control tasks;
@@ -46,9 +47,11 @@ Expected behavior: the CLI prints a parsed intent, a vision observation, a dry-r
 
 The output also shows:
 
+- the simulated speech-recognition input;
 - the function call selected by the voice interaction agent;
 - the current task state;
 - the dry-run execution backend result.
+- the simulated speech-synthesis output.
 
 Run a local closed-loop tracking simulation:
 
@@ -101,6 +104,7 @@ This matches the existing LeRobot LeKiwi pattern in the parent repository: Raspb
 This repository can make useful progress without real SSH:
 
 - intent parsing;
+- offline ASR/TTS interface wiring;
 - workflow state and task routing;
 - automatic function calls such as `vision.track_target` and `manipulation.touch_target`;
 - task status tracking for closed-loop progress;
@@ -144,9 +148,11 @@ python -m lekiwi_object.cli --text "看一下桌面" --dry-run
 
 1. Stage 0: dry-run workflow and repository hygiene.
 2. Stage 1: offline simulator, safety backend, and closed-loop tests.
-3. Stage 2: SSH check and documented Pi host startup.
-4. Stage 3: LeKiwi client observation stream on laptop.
-5. Stage 4: microphone ASR and TTS.
-6. Stage 5: visual recognition and target tracking.
-7. Stage 6: cautious object-touch primitive.
-8. Stage 7: demo script, logging, and robustness pass.
+3. Stage 2: function calls and task state.
+4. Stage 3: offline speech I/O with mock ASR/TTS.
+5. Stage 4: SSH check and documented Pi host startup.
+6. Stage 5: LeKiwi client observation stream on laptop.
+7. Stage 6: real microphone ASR and TTS.
+8. Stage 7: visual recognition and target tracking.
+9. Stage 8: cautious object-touch primitive.
+10. Stage 9: demo script, logging, and robustness pass.

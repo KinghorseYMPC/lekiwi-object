@@ -8,13 +8,20 @@ from lekiwi_object.config import AppConfig
 from lekiwi_object.function_calling import FunctionRouter
 from lekiwi_object.models import IntentType, WorkflowResult, WorkflowTrace
 from lekiwi_object.simulation import OfflineWorld
+from lekiwi_object.speech_io import MockSpeechIO, SpeechIO
 from lekiwi_object.task_state import TaskStateTracker
 
 
 class MultiAgentWorkflow:
-    def __init__(self, config: AppConfig, robot_backend: RobotBackend | None = None):
+    def __init__(
+        self,
+        config: AppConfig,
+        robot_backend: RobotBackend | None = None,
+        speech_io: SpeechIO | None = None,
+    ):
         self.config = config
         self.world = OfflineWorld(config.simulation)
+        self.speech_io = speech_io or MockSpeechIO(config.voice)
         self.voice = TextVoiceAgent()
         self.router = FunctionRouter()
         self.vision = SimulatedVisionAgent(config.vision, self.world)
@@ -29,7 +36,8 @@ class MultiAgentWorkflow:
         if steps < 1:
             raise ValueError("steps must be >= 1")
 
-        intent = self.voice.parse(text)
+        speech_input = self.speech_io.listen_text(text)
+        intent = self.voice.parse(speech_input.transcript)
         function_call = self.router.route(intent)
         results: list[WorkflowResult] = []
         for step_index in range(steps):
@@ -40,14 +48,17 @@ class MultiAgentWorkflow:
             response = self.voice.render_response(
                 intent, _response_for(intent.type, observation.summary, command.name, task_state.message)
             )
+            speech_output = self.speech_io.speak(response)
             results.append(
                 WorkflowResult(
+                    speech_input=speech_input,
                     intent=intent,
                     function_call=function_call,
                     observation=observation,
                     command=command,
                     execution=execution,
                     task_state=task_state,
+                    speech_output=speech_output,
                     response=response,
                     step_index=step_index,
                 )

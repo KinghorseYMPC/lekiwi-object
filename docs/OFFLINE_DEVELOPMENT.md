@@ -5,6 +5,7 @@ This stage intentionally avoids real SSH and hardware motion.
 ## What We Can Build Locally
 
 - Text-mode voice agent for Chinese commands.
+- Mock ASR/TTS wiring for the complete voice interaction shape.
 - Intent routing for chat, scene description, tracking, touch, and stop.
 - Explicit function calls from voice intent to agent capabilities.
 - Task state tracking for running, completed, and blocked workflows.
@@ -30,6 +31,12 @@ Scene description:
 python -m lekiwi_object.cli --text "看一下桌面" --dry-run
 ```
 
+Voice-loop shape with wake word:
+
+```bash
+python -m lekiwi_object.cli --text "小车，看一下桌面" --dry-run --json
+```
+
 Tracking loop:
 
 ```bash
@@ -51,6 +58,7 @@ python -m pytest -q -p no:cacheprovider
 ## Implementation Notes
 
 - `OfflineWorld` owns simulated target positions.
+- `MockSpeechIO` provides local mock ASR/TTS without microphone or speaker access.
 - `FunctionRouter` turns parsed voice intent into workflow calls.
 - `SimulatedVisionAgent` turns world state into observations.
 - `DryRunControlAgent` turns observations into safe commands.

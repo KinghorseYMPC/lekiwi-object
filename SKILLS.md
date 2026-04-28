@@ -12,6 +12,7 @@ When starting a new session:
 
 ```bash
 python -m lekiwi_object.cli --text "看一下桌面" --dry-run
+python -m lekiwi_object.cli --text "小车，看一下桌面" --dry-run --json
 python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6
 ```
 
@@ -38,6 +39,7 @@ python -m pytest -q -p no:cacheprovider
 Expected result:
 
 - tracking offsets shrink over multiple steps;
+- mock ASR and mock TTS fields appear in CLI JSON output;
 - touch commands remain blocked unless calibration is explicitly modeled;
 - each workflow result includes the chosen function call and task state;
 - execution backend is `dry_run`, meaning no SSH and no robot motion.

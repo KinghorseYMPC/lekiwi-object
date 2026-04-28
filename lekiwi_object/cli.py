@@ -34,6 +34,10 @@ def main(argv: list[str] | None = None) -> int:
 
 def _print_human(result: Any) -> None:
     print(f"Step {result.step_index}:")
+    print("Speech Input:")
+    print(f"  backend: {result.speech_input.backend}")
+    print(f"  transcript: {result.speech_input.transcript}")
+    print(f"  wake_detected: {result.speech_input.wake_detected}")
     print("Intent:")
     print(f"  type: {result.intent.type.value}")
     print(f"  target: {result.intent.target}")
@@ -58,6 +62,10 @@ def _print_human(result: Any) -> None:
     print(f"  message: {result.task_state.message}")
     print("Response:")
     print(f"  {result.response}")
+    print("Speech Output:")
+    print(f"  backend: {result.speech_output.backend}")
+    print(f"  audio_ref: {result.speech_output.audio_ref}")
+    print(f"  played: {result.speech_output.played}")
 
 
 def _to_jsonable(value: Any) -> Any:

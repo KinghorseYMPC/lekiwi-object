@@ -33,7 +33,18 @@ Acceptance:
 - Stop requests route to `robot.stop`.
 - Workflow output includes task status: `running`, `completed`, or `blocked`.
 
-## Stage 3: Robot Connectivity
+## Stage 3: Offline Speech I/O
+
+Goal: represent the full voice-interaction flow required by `guideline.md` without needing microphone or speaker hardware.
+
+Acceptance:
+
+- Workflow output includes mock ASR input.
+- Workflow output includes mock TTS output.
+- Wake-word stripping can be simulated locally.
+- Existing text command debugging remains available.
+
+## Stage 4: Robot Connectivity
 
 Goal: verify laptop-to-Pi connectivity and document the minimal Pi-side process.
 
@@ -43,7 +54,7 @@ Acceptance:
 - Pi host startup command is documented.
 - No password or secret is stored in git.
 
-## Stage 4: Observation Stream
+## Stage 5: Observation Stream
 
 Goal: receive front/wrist camera frames and robot state on the laptop.
 
@@ -53,7 +64,7 @@ Acceptance:
 - A local script prints state keys and frame sizes.
 - Dry-run commands remain the default.
 
-## Stage 5: Voice Interaction
+## Stage 6: Real Voice Interaction
 
 Goal: replace text input with microphone ASR and spoken replies.
 
@@ -63,7 +74,7 @@ Acceptance:
 - The system can reply by TTS.
 - Text mode remains available for debugging.
 
-## Stage 6: Vision Recognition And Tracking
+## Stage 7: Vision Recognition And Tracking
 
 Goal: support scene description and target centering.
 
@@ -73,7 +84,7 @@ Acceptance:
 - "看我的电脑屏幕" tracks a selected object in the wrist camera.
 - Tracking commands are rate-limited and safe.
 
-## Stage 7: Object Touch
+## Stage 8: Object Touch
 
 Goal: implement a cautious touch primitive for one selected object class.
 
