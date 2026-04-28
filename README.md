@@ -17,6 +17,8 @@ Implemented in this initial stage:
 - project docs for future Codex sessions;
 - local multi-agent workflow skeleton;
 - fuzzy text intent routing for Chinese commands;
+- explicit function calls from voice-agent intent to vision/control tasks;
+- task states for running, completed, and blocked workflows;
 - simulated vision observations and a multi-step offline world;
 - dry-run control command generation;
 - dry-run robot backend that records commands without SSH or robot motion;
@@ -41,6 +43,12 @@ python -m lekiwi_object.cli --text "碰一下那个开关" --dry-run
 ```
 
 Expected behavior: the CLI prints a parsed intent, a vision observation, a dry-run control command, and a Chinese response.
+
+The output also shows:
+
+- the function call selected by the voice interaction agent;
+- the current task state;
+- the dry-run execution backend result.
 
 Run a local closed-loop tracking simulation:
 
@@ -94,6 +102,8 @@ This repository can make useful progress without real SSH:
 
 - intent parsing;
 - workflow state and task routing;
+- automatic function calls such as `vision.track_target` and `manipulation.touch_target`;
+- task status tracking for closed-loop progress;
 - simulated scene recognition;
 - simulated target tracking;
 - safety rules and dry-run command execution;

@@ -21,7 +21,19 @@ Acceptance:
 - Touch commands are blocked unless calibration is explicitly modeled.
 - Unit tests cover intent routing, tracking convergence, and live-command rejection.
 
-## Stage 2: Robot Connectivity
+## Stage 2: Function Calls And Task State
+
+Goal: make the voice interaction agent explicitly choose workflow capabilities, as required by `guideline.md`.
+
+Acceptance:
+
+- Scene requests route to `vision.describe_scene`.
+- Tracking requests route to `vision.track_target`.
+- Touch requests route to `manipulation.touch_target`.
+- Stop requests route to `robot.stop`.
+- Workflow output includes task status: `running`, `completed`, or `blocked`.
+
+## Stage 3: Robot Connectivity
 
 Goal: verify laptop-to-Pi connectivity and document the minimal Pi-side process.
 
@@ -31,7 +43,7 @@ Acceptance:
 - Pi host startup command is documented.
 - No password or secret is stored in git.
 
-## Stage 3: Observation Stream
+## Stage 4: Observation Stream
 
 Goal: receive front/wrist camera frames and robot state on the laptop.
 
@@ -41,7 +53,7 @@ Acceptance:
 - A local script prints state keys and frame sizes.
 - Dry-run commands remain the default.
 
-## Stage 4: Voice Interaction
+## Stage 5: Voice Interaction
 
 Goal: replace text input with microphone ASR and spoken replies.
 
@@ -51,7 +63,7 @@ Acceptance:
 - The system can reply by TTS.
 - Text mode remains available for debugging.
 
-## Stage 5: Vision Recognition And Tracking
+## Stage 6: Vision Recognition And Tracking
 
 Goal: support scene description and target centering.
 
@@ -61,7 +73,7 @@ Acceptance:
 - "看我的电脑屏幕" tracks a selected object in the wrist camera.
 - Tracking commands are rate-limited and safe.
 
-## Stage 6: Object Touch
+## Stage 7: Object Touch
 
 Goal: implement a cautious touch primitive for one selected object class.
 

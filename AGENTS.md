@@ -31,6 +31,8 @@ The initial skeleton is intentionally conservative:
 
 - `lekiwi_object.workflow` coordinates agents.
 - `lekiwi_object.agents.voice_agent` parses text commands as the first local stand-in for speech.
+- `lekiwi_object.function_calling` converts voice intent into explicit function calls.
+- `lekiwi_object.task_state` tracks whether a task is running, completed, or blocked.
 - `lekiwi_object.simulation` provides an offline world for multi-step tracking tests.
 - `lekiwi_object.agents.vision_agent` reads simulated observations, with room for camera/VLM backends.
 - `lekiwi_object.agents.control_agent` maps intents to safe dry-run control commands.

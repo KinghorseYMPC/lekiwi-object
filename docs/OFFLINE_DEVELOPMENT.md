@@ -6,6 +6,8 @@ This stage intentionally avoids real SSH and hardware motion.
 
 - Text-mode voice agent for Chinese commands.
 - Intent routing for chat, scene description, tracking, touch, and stop.
+- Explicit function calls from voice intent to agent capabilities.
+- Task state tracking for running, completed, and blocked workflows.
 - Simulated vision observations with image-space target boxes.
 - Closed-loop tracking simulation.
 - Safety-limited control command generation.
@@ -49,7 +51,9 @@ python -m pytest -q -p no:cacheprovider
 ## Implementation Notes
 
 - `OfflineWorld` owns simulated target positions.
+- `FunctionRouter` turns parsed voice intent into workflow calls.
 - `SimulatedVisionAgent` turns world state into observations.
 - `DryRunControlAgent` turns observations into safe commands.
 - `DryRunRobotBackend` records commands and never contacts the Pi.
+- `TaskStateTracker` summarizes progress for user-facing feedback.
 - `MultiAgentWorkflow.run_text_loop(..., steps=N)` links these pieces into a local feedback loop.

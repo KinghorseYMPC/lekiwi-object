@@ -39,6 +39,7 @@ Expected result:
 
 - tracking offsets shrink over multiple steps;
 - touch commands remain blocked unless calibration is explicitly modeled;
+- each workflow result includes the chosen function call and task state;
 - execution backend is `dry_run`, meaning no SSH and no robot motion.
 
 ## Skill: Raspberry Pi SSH Check
