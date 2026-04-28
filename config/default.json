@@ -1,0 +1,22 @@
+{
+  "robot": {
+    "host": "rasberrypi16.local",
+    "user": "gjy",
+    "zmq_command_port": 5555,
+    "zmq_observation_port": 5556
+  },
+  "safety": {
+    "dry_run": true,
+    "max_linear_speed_mps": 0.1,
+    "max_angular_speed_dps": 20.0,
+    "max_action_duration_s": 0.5
+  },
+  "vision": {
+    "backend": "simulated",
+    "default_target": "电脑屏幕"
+  },
+  "voice": {
+    "backend": "text"
+  }
+}
+

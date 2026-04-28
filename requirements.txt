@@ -1,0 +1,9 @@
+# Core skeleton uses only the Python standard library.
+#
+# Optional dependencies for later stages:
+# opencv-python
+# pyzmq
+# SpeechRecognition
+# pyaudio
+# paramiko
+
