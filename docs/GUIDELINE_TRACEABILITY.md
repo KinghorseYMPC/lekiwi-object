@@ -67,6 +67,16 @@ The voice-side router currently emits:
 
 This keeps the workflow aligned with the requirement that the interaction agent decides which capability to call.
 
+## Offline Traceability
+
+The CLI can export one JSONL record per workflow step:
+
+```bash
+python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6 --trace-jsonl logs/demo_trace.jsonl
+```
+
+Each record preserves the full local chain from mock speech input through function calling, vision observation, control planning, safety review, dry-run execution, task status, and mock speech output. This supports the stage-one requirement that the system form a complete workflow loop before hardware validation.
+
 ## Explicit Non-Goals Before User Approval
 
 - No real SSH connection.

@@ -2,11 +2,10 @@ from __future__ import annotations
 
 import argparse
 import json
-from dataclasses import asdict, is_dataclass
-from enum import Enum
 from typing import Any
 
 from lekiwi_object.config import load_config
+from lekiwi_object.trace_export import trace_to_records, write_trace_jsonl
 from lekiwi_object.workflow import MultiAgentWorkflow
 
 
@@ -17,6 +16,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--dry-run", action="store_true", help="Keep robot commands in dry-run mode.")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON.")
     parser.add_argument("--steps", type=int, default=1, help="Number of offline closed-loop simulation steps.")
+    parser.add_argument("--trace-jsonl", default=None, help="Write workflow trace JSONL under this project folder.")
     args = parser.parse_args(argv)
 
     config = load_config(args.config)
@@ -24,8 +24,12 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("Refusing to override a live config from the CLI skeleton. Use a config file intentionally.")
 
     trace = MultiAgentWorkflow(config).run_text_loop(args.text, steps=args.steps)
+    if args.trace_jsonl:
+        output_path = write_trace_jsonl(trace, args.trace_jsonl)
+        print(f"Trace JSONL written: {output_path}")
     if args.json:
-        print(json.dumps(_to_jsonable(trace.results if args.steps > 1 else trace.final), ensure_ascii=False, indent=2))
+        records = trace_to_records(trace)
+        print(json.dumps(records if args.steps > 1 else records[-1], ensure_ascii=False, indent=2))
     else:
         for result in trace.results:
             _print_human(result)
@@ -68,19 +72,6 @@ def _print_human(result: Any) -> None:
     print(f"  backend: {result.speech_output.backend}")
     print(f"  audio_ref: {result.speech_output.audio_ref}")
     print(f"  played: {result.speech_output.played}")
-
-
-def _to_jsonable(value: Any) -> Any:
-    if isinstance(value, Enum):
-        return value.value
-    if is_dataclass(value):
-        return {key: _to_jsonable(item) for key, item in asdict(value).items()}
-    if isinstance(value, dict):
-        return {key: _to_jsonable(item) for key, item in value.items()}
-    if isinstance(value, (list, tuple)):
-        return [_to_jsonable(item) for item in value]
-    return value
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

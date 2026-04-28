@@ -16,6 +16,7 @@ This stage intentionally avoids real SSH and hardware motion.
 - Safety-limited control command generation.
 - Centralized control safety review.
 - Dry-run command execution backend.
+- JSONL trace export for reproducible local demos.
 - Tests that run on a teammate's laptop after cloning from GitHub.
 
 ## What We Are Not Claiming Yet
@@ -58,6 +59,12 @@ Tests:
 python -m pytest -q -p no:cacheprovider
 ```
 
+Trace export:
+
+```bash
+python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6 --trace-jsonl logs/demo_trace.jsonl
+```
+
 ## Implementation Notes
 
 - `OfflineWorld` owns simulated target positions.
@@ -71,6 +78,7 @@ python -m pytest -q -p no:cacheprovider
 - `ControlSafetyLayer` rejects commands that exceed configured limits or attempt unsafe live motion.
 - `DryRunRobotBackend` records commands and never contacts the Pi.
 - `TaskStateTracker` summarizes progress for user-facing feedback.
+- `trace_export` serializes each workflow step to JSONL for offline replay and demo review.
 - `MultiAgentWorkflow.run_text_loop(..., steps=N)` links these pieces into a local feedback loop.
 
 ## Camera Boundary

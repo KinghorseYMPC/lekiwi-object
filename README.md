@@ -26,6 +26,7 @@ Implemented in this initial stage:
 - dry-run control command generation;
 - centralized control safety layer for speed, duration, live-motion, and guarded-touch checks;
 - dry-run robot backend that records commands without SSH or robot motion;
+- JSONL trace export for offline demo and debugging sessions;
 - SSH reachability checker for the Raspberry Pi;
 - project-level git setup plan.
 
@@ -64,6 +65,14 @@ python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6
 ```
 
 Expected behavior: each step observes the simulated target, emits a safe centering command, records it locally, and updates the offline world so the target moves toward the image center.
+
+Export an offline demo trace:
+
+```bash
+python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6 --trace-jsonl logs/demo_trace.jsonl
+```
+
+Expected behavior: `logs/demo_trace.jsonl` contains one JSON record per workflow step. Each record includes speech input, intent, function call, vision observation, control command, execution result, safety review, task state, and speech output.
 
 ## Raspberry Pi SSH Check
 
@@ -118,6 +127,7 @@ This repository can make useful progress without real SSH:
 - camera source policy for offline, sample-file, or Raspberry Pi USB cameras only;
 - safety rules and dry-run command execution;
 - centralized command safety review before backend execution;
+- JSONL trace export for reproducible offline demos;
 - tests and GitHub collaboration.
 
 Real SSH or hardware is still required for:
@@ -179,8 +189,9 @@ python -m lekiwi_object.cli --text "看一下桌面" --dry-run
 6. Stage 5: vision backend interface for future camera/VLM integration.
 7. Stage 6: camera source privacy policy and Raspberry Pi USB camera boundary.
 8. Stage 7: control safety layer for backend execution.
-9. Stage 8: LeKiwi client observation stream on laptop.
-10. Stage 9: real microphone ASR and TTS.
-11. Stage 10: visual recognition and target tracking.
-12. Stage 11: cautious object-touch primitive.
-13. Stage 12: demo script, logging, and robustness pass.
+9. Stage 8: offline session trace export for demos and debugging.
+10. Stage 9: LeKiwi client observation stream on laptop.
+11. Stage 10: real microphone ASR and TTS.
+12. Stage 11: visual recognition and target tracking.
+13. Stage 12: cautious object-touch primitive.
+14. Stage 13: demo script, logging, and robustness pass.

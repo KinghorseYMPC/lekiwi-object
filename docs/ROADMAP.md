@@ -89,7 +89,18 @@ Acceptance:
 - Live guarded touch is blocked until explicit hardware-stage approval.
 - Execution output includes safety status and violations.
 
-## Stage 8: Observation Stream
+## Stage 8: Offline Session Trace Export
+
+Goal: preserve complete local workflow runs for debugging, teammate handoff, and course demo preparation.
+
+Acceptance:
+
+- CLI can write `--trace-jsonl logs/<name>.jsonl`.
+- Trace export path must stay inside the project folder.
+- Each record includes speech input, function call, vision observation, command, execution, safety review, task state, and speech output.
+- Tests cover serialization and path validation.
+
+## Stage 9: Observation Stream
 
 Goal: receive front/wrist camera frames and robot state on the laptop.
 
@@ -99,7 +110,7 @@ Acceptance:
 - A local script prints state keys and frame sizes.
 - Dry-run commands remain the default.
 
-## Stage 9: Real Voice Interaction
+## Stage 10: Real Voice Interaction
 
 Goal: replace text input with microphone ASR and spoken replies.
 
@@ -109,7 +120,7 @@ Acceptance:
 - The system can reply by TTS.
 - Text mode remains available for debugging.
 
-## Stage 10: Vision Recognition And Tracking
+## Stage 11: Vision Recognition And Tracking
 
 Goal: support scene description and target centering.
 
@@ -119,7 +130,7 @@ Acceptance:
 - "看我的电脑屏幕" tracks a selected object in the wrist camera.
 - Tracking commands are rate-limited and safe.
 
-## Stage 11: Object Touch
+## Stage 12: Object Touch
 
 Goal: implement a cautious touch primitive for one selected object class.
 

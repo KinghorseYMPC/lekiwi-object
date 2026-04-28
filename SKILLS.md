@@ -14,6 +14,7 @@ When starting a new session:
 python -m lekiwi_object.cli --text "看一下桌面" --dry-run
 python -m lekiwi_object.cli --text "小车，看一下桌面" --dry-run --json
 python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6
+python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6 --trace-jsonl logs/demo_trace.jsonl
 ```
 
 ## Skill: Safe Robot Work
@@ -64,6 +65,16 @@ Useful check:
 python -m lekiwi_object.cli --text "停下" --dry-run --json
 ```
 
+## Skill: Trace Export
+
+Use JSONL traces to preserve a complete local workflow run:
+
+```bash
+python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6 --trace-jsonl logs/demo_trace.jsonl
+```
+
+Trace files must stay inside the project folder. `logs/` is ignored by git and is suitable for local demo artifacts.
+
 ## Skill: Offline Simulation
 
 Use this while SSH or hardware is unavailable:
@@ -83,6 +94,7 @@ Expected result:
 - vision observations include the active `vision_backend`;
 - vision observations show `opens_laptop_camera: false`;
 - execution output includes safety review status and violations;
+- optional JSONL trace export writes one record per workflow step;
 - execution backend is `dry_run`, meaning no SSH and no robot motion.
 
 ## Skill: Raspberry Pi SSH Check
