@@ -65,7 +65,19 @@ Acceptance:
 - Workflow can receive a custom vision backend later without changing the voice/control loop.
 - Tests cover backend delegation and metadata.
 
-## Stage 6: Observation Stream
+## Stage 6: Camera Source Privacy Boundary
+
+Goal: enforce that project vision never opens the laptop camera, while leaving a path for the Raspberry Pi USB camera.
+
+Acceptance:
+
+- Config defaults to `vision.source = offline_world`.
+- `vision.allow_laptop_camera = true` is rejected.
+- `vision.source = laptop_camera` is rejected.
+- `raspberry_pi_usb` is documented as the future robot-side camera source.
+- Vision metadata records `opens_laptop_camera = false`.
+
+## Stage 7: Observation Stream
 
 Goal: receive front/wrist camera frames and robot state on the laptop.
 
@@ -75,7 +87,7 @@ Acceptance:
 - A local script prints state keys and frame sizes.
 - Dry-run commands remain the default.
 
-## Stage 7: Real Voice Interaction
+## Stage 8: Real Voice Interaction
 
 Goal: replace text input with microphone ASR and spoken replies.
 
@@ -85,7 +97,7 @@ Acceptance:
 - The system can reply by TTS.
 - Text mode remains available for debugging.
 
-## Stage 8: Vision Recognition And Tracking
+## Stage 9: Vision Recognition And Tracking
 
 Goal: support scene description and target centering.
 
@@ -95,7 +107,7 @@ Acceptance:
 - "看我的电脑屏幕" tracks a selected object in the wrist camera.
 - Tracking commands are rate-limited and safe.
 
-## Stage 9: Object Touch
+## Stage 10: Object Touch
 
 Goal: implement a cautious touch primitive for one selected object class.
 

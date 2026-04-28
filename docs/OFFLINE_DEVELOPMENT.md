@@ -10,6 +10,7 @@ This stage intentionally avoids real SSH and hardware motion.
 - Explicit function calls from voice intent to agent capabilities.
 - Task state tracking for running, completed, and blocked workflows.
 - Replaceable vision backend interface.
+- Camera source policy that forbids laptop camera use.
 - Simulated vision observations with image-space target boxes.
 - Closed-loop tracking simulation.
 - Safety-limited control command generation.
@@ -62,9 +63,16 @@ python -m pytest -q -p no:cacheprovider
 - `MockSpeechIO` provides local mock ASR/TTS without microphone or speaker access.
 - `FunctionRouter` turns parsed voice intent into workflow calls.
 - `VisionBackend` defines the future camera/VLM integration point.
+- `CameraSourcePolicy` rejects laptop/local webcam sources.
 - `OfflineVisionBackend` adapts `OfflineWorld` to the vision-agent contract.
 - `SimulatedVisionAgent` turns world state into observations.
 - `DryRunControlAgent` turns observations into safe commands.
 - `DryRunRobotBackend` records commands and never contacts the Pi.
 - `TaskStateTracker` summarizes progress for user-facing feedback.
 - `MultiAgentWorkflow.run_text_loop(..., steps=N)` links these pieces into a local feedback loop.
+
+## Camera Boundary
+
+The USB camera used for the project is connected directly to the Raspberry Pi. It may be fixed to the follower arm or removed from the arm, but it remains robot-side hardware.
+
+The laptop camera is forbidden for privacy reasons. Offline development must use `offline_world` or explicit sample files. Later hardware development may use `raspberry_pi_usb` after SSH and LeKiwi host setup are approved.

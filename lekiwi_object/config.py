@@ -31,6 +31,9 @@ class SafetyConfig:
 class VisionConfig:
     backend: str = "simulated"
     default_target: str = "电脑屏幕"
+    source: str = "offline_world"
+    allow_laptop_camera: bool = False
+    raspberry_pi_camera_name: str = "wrist_usb"
 
 
 @dataclass(frozen=True)
@@ -72,10 +75,19 @@ def load_config(path: str | Path | None = None) -> AppConfig:
         raise FileNotFoundError(f"Config file not found: {config_path}")
 
     data = json.loads(config_path.read_text(encoding="utf-8"))
-    return AppConfig(
+    config = AppConfig(
         robot=RobotConfig(**_section(data, "robot")),
         safety=SafetyConfig(**_section(data, "safety")),
         vision=VisionConfig(**_section(data, "vision")),
         voice=VoiceConfig(**_section(data, "voice")),
         simulation=SimulationConfig(**_section(data, "simulation")),
     )
+    _validate_config(config)
+    return config
+
+
+def _validate_config(config: AppConfig) -> None:
+    if config.vision.allow_laptop_camera:
+        raise ValueError("Laptop camera use is forbidden by project policy.")
+    if config.vision.source == "laptop_camera":
+        raise ValueError("vision.source='laptop_camera' is forbidden by project policy.")

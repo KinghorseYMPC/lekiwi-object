@@ -21,6 +21,7 @@ Implemented in this initial stage:
 - explicit function calls from voice-agent intent to vision/control tasks;
 - task states for running, completed, and blocked workflows;
 - replaceable vision backend interface for scene understanding and tracking;
+- camera source policy that forbids laptop camera use;
 - simulated vision observations and a multi-step offline world;
 - dry-run control command generation;
 - dry-run robot backend that records commands without SSH or robot motion;
@@ -112,6 +113,7 @@ This repository can make useful progress without real SSH:
 - simulated scene recognition;
 - simulated target tracking;
 - replaceable vision backend wiring for future camera/VLM integration;
+- camera source policy for offline, sample-file, or Raspberry Pi USB cameras only;
 - safety rules and dry-run command execution;
 - tests and GitHub collaboration.
 
@@ -122,6 +124,24 @@ Real SSH or hardware is still required for:
 - receiving real camera frames;
 - verifying motor IDs, directions, limits, and latency;
 - validating any physical touch behavior.
+
+## Camera Privacy Policy
+
+This project must not open or use the laptop camera.
+
+Allowed visual inputs:
+
+- `offline_world`: deterministic simulation, no physical camera.
+- `sample_file`: explicit local sample file, no camera access.
+- `raspberry_pi_usb`: USB camera directly connected to the Raspberry Pi, for later hardware stages.
+
+Forbidden visual inputs:
+
+- laptop camera;
+- local webcam;
+- OpenCV numeric camera indices on the laptop.
+
+The default config keeps `vision.allow_laptop_camera` set to `false`. If a config tries to enable the laptop camera or sets `vision.source` to `laptop_camera`, the project raises an error before any camera code can run.
 
 ## GitHub Setup
 
@@ -154,8 +174,9 @@ python -m lekiwi_object.cli --text "看一下桌面" --dry-run
 4. Stage 3: offline speech I/O with mock ASR/TTS.
 5. Stage 4: SSH check and documented Pi host startup.
 6. Stage 5: vision backend interface for future camera/VLM integration.
-7. Stage 6: LeKiwi client observation stream on laptop.
-8. Stage 7: real microphone ASR and TTS.
-9. Stage 8: visual recognition and target tracking.
-10. Stage 9: cautious object-touch primitive.
-11. Stage 10: demo script, logging, and robustness pass.
+7. Stage 6: camera source privacy policy and Raspberry Pi USB camera boundary.
+8. Stage 7: LeKiwi client observation stream on laptop.
+9. Stage 8: real microphone ASR and TTS.
+10. Stage 9: visual recognition and target tracking.
+11. Stage 10: cautious object-touch primitive.
+12. Stage 11: demo script, logging, and robustness pass.

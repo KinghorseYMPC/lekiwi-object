@@ -23,7 +23,8 @@ Build the course project described in `guideline.md`:
 3. Keep Raspberry Pi changes minimal. Prefer laptop-side code and dry-run simulation first.
 4. Never commit secrets. Do not write the Raspberry Pi password into tracked files.
 5. Before hardware motion, keep `safety.dry_run` enabled until the user explicitly asks for live control.
-6. Prefer small stages. Each new stage should leave runnable code, docs, and a git commit.
+6. Never open or use the laptop camera. Visual input may only come from offline simulation, explicit sample files, or the USB camera directly connected to the Raspberry Pi.
+7. Prefer small stages. Each new stage should leave runnable code, docs, and a git commit.
 
 ## Current Architecture
 
@@ -35,6 +36,7 @@ The initial skeleton is intentionally conservative:
 - `lekiwi_object.function_calling` converts voice intent into explicit function calls.
 - `lekiwi_object.task_state` tracks whether a task is running, completed, or blocked.
 - `lekiwi_object.simulation` provides an offline world for multi-step tracking tests.
+- `lekiwi_object.camera_sources` enforces the laptop-camera privacy ban.
 - `lekiwi_object.vision_backends` defines the backend contract for future camera/VLM work.
 - `lekiwi_object.agents.vision_agent` reads simulated observations, with room for camera/VLM backends.
 - `lekiwi_object.agents.control_agent` maps intents to safe dry-run control commands.
@@ -49,8 +51,9 @@ The initial skeleton is intentionally conservative:
 4. Stage 3: local speech I/O interface with mock ASR/TTS.
 5. Stage 4: SSH and LeKiwi host startup checklist.
 6. Stage 5: vision backend interface for future camera/VLM integration.
-7. Stage 6: local text command workflow with real LeKiwi observation stream.
-8. Stage 7: microphone ASR and TTS.
-9. Stage 8: visual recognition and target tracking.
-10. Stage 9: safe object touch primitive.
-11. Stage 10: demo polish and robustness.
+7. Stage 6: camera source privacy policy and Raspberry Pi USB camera boundary.
+8. Stage 7: local text command workflow with real LeKiwi observation stream.
+9. Stage 8: microphone ASR and TTS.
+10. Stage 9: visual recognition and target tracking.
+11. Stage 10: safe object touch primitive.
+12. Stage 11: demo polish and robustness.

@@ -13,7 +13,10 @@
   },
   "vision": {
     "backend": "simulated",
-    "default_target": "电脑屏幕"
+    "default_target": "电脑屏幕",
+    "source": "offline_world",
+    "allow_laptop_camera": false,
+    "raspberry_pi_camera_name": "wrist_usb"
   },
   "voice": {
     "backend": "text",

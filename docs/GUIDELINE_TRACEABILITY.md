@@ -18,6 +18,7 @@ Vision agent:
 - Current local implementation: `SimulatedVisionAgent` plus `OfflineWorld`
 - Current backend contract: `VisionBackend`
 - Current backend implementation: `OfflineVisionBackend`
+- Current camera policy: laptop camera is forbidden; allowed sources are offline simulation, sample files, or Raspberry Pi USB camera.
 - Current capability: scene description, target bounding boxes, target offsets, touch target metadata.
 - Next capability: real camera frames and VLM/object detection.
 
@@ -70,4 +71,5 @@ This keeps the workflow aligned with the requirement that the interaction agent 
 - No real SSH connection.
 - No Raspberry Pi file changes.
 - No live robot motion.
+- No laptop camera access.
 - No stored password or secret.

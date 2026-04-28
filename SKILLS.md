@@ -26,6 +26,27 @@ Before any live robot command:
 4. Confirm `--dry-run` is not being removed accidentally.
 5. Use short durations and low speed first.
 
+## Skill: Camera Privacy
+
+The project must never use the laptop camera.
+
+Allowed sources:
+
+- `offline_world`
+- `sample_file`
+- `raspberry_pi_usb`
+
+Useful check:
+
+```bash
+python -m lekiwi_object.cli --text "看一下桌面" --dry-run --json
+```
+
+Expected metadata includes:
+
+- `camera_source: offline_world`
+- `opens_laptop_camera: false`
+
 ## Skill: Offline Simulation
 
 Use this while SSH or hardware is unavailable:
@@ -43,6 +64,7 @@ Expected result:
 - touch commands remain blocked unless calibration is explicitly modeled;
 - each workflow result includes the chosen function call and task state;
 - vision observations include the active `vision_backend`;
+- vision observations show `opens_laptop_camera: false`;
 - execution backend is `dry_run`, meaning no SSH and no robot motion.
 
 ## Skill: Raspberry Pi SSH Check

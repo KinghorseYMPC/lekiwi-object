@@ -12,6 +12,7 @@ def test_offline_vision_backend_describes_scene():
     assert observation.target == "画面"
     assert "visible_objects" in observation.metadata
     assert observation.metadata["vision_backend"] == "offline_world"
+    assert observation.metadata["opens_laptop_camera"] is False
 
 
 def test_vision_agent_delegates_to_backend():
