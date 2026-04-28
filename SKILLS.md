@@ -75,6 +75,15 @@ python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6 -
 
 Trace files must stay inside the project folder. `logs/` is ignored by git and is suitable for local demo artifacts.
 
+## Skill: Hardware Prerequisites
+
+Before real hardware work, check these local gates:
+
+- `CalibrationGate` marks hand-eye calibration readiness.
+- `SampleFileVisionBackend` verifies recognition output shape using explicit sample JSON.
+- `TouchPlanner` lists missing requirements for object touch.
+- `VoicePrerequisiteEvaluator` checks baseline Chinese command coverage.
+
 ## Skill: Offline Simulation
 
 Use this while SSH or hardware is unavailable:
@@ -95,6 +104,7 @@ Expected result:
 - vision observations show `opens_laptop_camera: false`;
 - execution output includes safety review status and violations;
 - optional JSONL trace export writes one record per workflow step;
+- prerequisite gates clearly block hardware-only steps until data is available;
 - execution backend is `dry_run`, meaning no SSH and no robot motion.
 
 ## Skill: Raspberry Pi SSH Check

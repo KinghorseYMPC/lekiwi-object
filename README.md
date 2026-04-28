@@ -27,6 +27,7 @@ Implemented in this initial stage:
 - centralized control safety layer for speed, duration, live-motion, and guarded-touch checks;
 - dry-run robot backend that records commands without SSH or robot motion;
 - JSONL trace export for offline demo and debugging sessions;
+- prerequisite gates for hand-eye calibration, visual recognition samples, touch planning, and voice command coverage;
 - SSH reachability checker for the Raspberry Pi;
 - project-level git setup plan.
 
@@ -190,8 +191,9 @@ python -m lekiwi_object.cli --text "看一下桌面" --dry-run
 7. Stage 6: camera source privacy policy and Raspberry Pi USB camera boundary.
 8. Stage 7: control safety layer for backend execution.
 9. Stage 8: offline session trace export for demos and debugging.
-10. Stage 9: LeKiwi client observation stream on laptop.
-11. Stage 10: real microphone ASR and TTS.
-12. Stage 11: visual recognition and target tracking.
-13. Stage 12: cautious object-touch primitive.
-14. Stage 13: demo script, logging, and robustness pass.
+10. Stage 9: hardware prerequisite gates: calibration, sample vision, touch planning, voice coverage.
+11. Stage 10: LeKiwi client observation stream on laptop.
+12. Stage 11: real microphone ASR and TTS.
+13. Stage 12: visual recognition and target tracking.
+14. Stage 13: cautious object-touch primitive.
+15. Stage 14: demo script, logging, and robustness pass.

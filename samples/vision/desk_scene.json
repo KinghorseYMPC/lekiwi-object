@@ -1,0 +1,24 @@
+{
+  "summary": "样例视觉：画面中有电脑屏幕、按钮和开关。",
+  "objects": [
+    {
+      "name": "电脑屏幕",
+      "bbox_xywh": [210, 90, 220, 140],
+      "confidence": 0.91,
+      "metadata": {
+        "offset_x_norm": 0.0,
+        "offset_y_norm": -0.08
+      }
+    },
+    {
+      "name": "开关",
+      "bbox_xywh": [420, 220, 50, 60],
+      "confidence": 0.84,
+      "metadata": {
+        "offset_x_norm": 0.18,
+        "offset_y_norm": 0.08,
+        "estimated_depth_m": 0.31
+      }
+    }
+  ]
+}

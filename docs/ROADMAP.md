@@ -100,7 +100,18 @@ Acceptance:
 - Each record includes speech input, function call, vision observation, command, execution, safety review, task state, and speech output.
 - Tests cover serialization and path validation.
 
-## Stage 9: Observation Stream
+## Stage 9: Hardware Prerequisite Gates
+
+Goal: prepare the real stage-one workflow without claiming hardware readiness.
+
+Acceptance:
+
+- Hand-eye calibration readiness can be evaluated.
+- Sample vision JSON can exercise recognition output shape.
+- Object touch requests produce a dry-run touch plan and missing prerequisites.
+- Baseline Chinese command coverage is tested.
+
+## Stage 10: Observation Stream
 
 Goal: receive front/wrist camera frames and robot state on the laptop.
 
@@ -110,7 +121,7 @@ Acceptance:
 - A local script prints state keys and frame sizes.
 - Dry-run commands remain the default.
 
-## Stage 10: Real Voice Interaction
+## Stage 11: Real Voice Interaction
 
 Goal: replace text input with microphone ASR and spoken replies.
 
@@ -120,7 +131,7 @@ Acceptance:
 - The system can reply by TTS.
 - Text mode remains available for debugging.
 
-## Stage 11: Vision Recognition And Tracking
+## Stage 12: Vision Recognition And Tracking
 
 Goal: support scene description and target centering.
 
@@ -130,7 +141,7 @@ Acceptance:
 - "看我的电脑屏幕" tracks a selected object in the wrist camera.
 - Tracking commands are rate-limited and safe.
 
-## Stage 12: Object Touch
+## Stage 13: Object Touch
 
 Goal: implement a cautious touch primitive for one selected object class.
 

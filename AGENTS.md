@@ -43,6 +43,7 @@ The initial skeleton is intentionally conservative:
 - `lekiwi_object.control_safety` reviews commands before backend execution.
 - `lekiwi_object.backends` records dry-run commands locally and blocks live execution in offline mode.
 - `lekiwi_object.trace_export` writes reproducible local JSONL workflow traces.
+- `lekiwi_object.calibration`, `touch_planning`, `vision_targets`, and `voice_prerequisites` model hardware-stage prerequisites.
 - `lekiwi_object.tools.check_ssh` verifies Raspberry Pi SSH reachability without storing credentials.
 
 ## Suggested Development Stages
@@ -56,8 +57,9 @@ The initial skeleton is intentionally conservative:
 7. Stage 6: camera source privacy policy and Raspberry Pi USB camera boundary.
 8. Stage 7: control safety layer for backend execution.
 9. Stage 8: offline session trace export for demos and debugging.
-10. Stage 9: local text command workflow with real LeKiwi observation stream.
-11. Stage 10: microphone ASR and TTS.
-12. Stage 11: visual recognition and target tracking.
-13. Stage 12: safe object touch primitive.
-14. Stage 13: demo polish and robustness.
+10. Stage 9: hardware prerequisite gates: calibration, sample vision, touch planning, voice coverage.
+11. Stage 10: local text command workflow with real LeKiwi observation stream.
+12. Stage 11: microphone ASR and TTS.
+13. Stage 12: visual recognition and target tracking.
+14. Stage 13: safe object touch primitive.
+15. Stage 14: demo polish and robustness.

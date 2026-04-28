@@ -55,6 +55,15 @@ Object touch:
 - Verification: `python -m lekiwi_object.cli --text "碰一下那个开关" --dry-run --json`
 - Remaining: hand-eye calibration, guarded motion planning, and hardware validation.
 
+## Hardware Prerequisites
+
+The following local modules support `guideline.md` but do not replace real hardware validation:
+
+- `calibration.py`: checks whether hand-eye calibration data is complete.
+- `vision_targets.py` and `SampleFileVisionBackend`: prepare target definitions and sample-file recognition before the Raspberry Pi USB camera is used.
+- `touch_planning.py`: creates a dry-run touch plan and lists missing prerequisites.
+- `voice_prerequisites.py`: checks baseline Chinese command coverage before real ASR/TTS.
+
 ## Function Calling
 
 The voice-side router currently emits:

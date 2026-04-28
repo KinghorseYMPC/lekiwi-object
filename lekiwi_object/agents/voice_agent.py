@@ -8,7 +8,7 @@ from lekiwi_object.models import Intent, IntentType
 _INTENT_EXAMPLES: list[tuple[IntentType, str | None, tuple[str, ...]]] = [
     (IntentType.STOP, "停止", ("停", "停止", "别动", "急停", "stop")),
     (IntentType.DESCRIBE_SCENE, "画面", ("看一下", "看到了什么", "识别", "做什么", "描述", "场景", "画面", "桌面")),
-    (IntentType.TRACK_TARGET, "目标", ("跟随", "看着", "盯着", "追踪", "转向", "屏幕", "人脸")),
+    (IntentType.TRACK_TARGET, "目标", ("跟随", "看着", "盯着", "盯", "追踪", "转向", "屏幕", "人脸")),
     (IntentType.TOUCH_TARGET, "目标", ("碰", "触碰", "点一下", "按一下", "开关", "按钮")),
     (IntentType.CHAT, None, ("你好", "介绍", "聊天", "你是谁")),
 ]
@@ -70,6 +70,8 @@ def _score(text: str, keyword: str) -> float:
 
 
 def _extract_target(text: str) -> str | None:
+    if "正在电脑" in text:
+        return None
     for hint in _TARGET_HINTS:
         if hint in text:
             return hint

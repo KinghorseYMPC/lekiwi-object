@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from lekiwi_object.config import SafetyConfig
 from lekiwi_object.models import ControlCommand, Intent, IntentType, VisionObservation
+from lekiwi_object.touch_planning import TouchPlanner
 
 
 class DryRunControlAgent:
@@ -9,6 +10,7 @@ class DryRunControlAgent:
 
     def __init__(self, safety: SafetyConfig):
         self.safety = safety
+        self.touch_planner = TouchPlanner()
 
     def plan(self, intent: Intent, observation: VisionObservation) -> ControlCommand:
         if intent.type == IntentType.STOP:
@@ -45,13 +47,19 @@ class DryRunControlAgent:
             )
 
         if intent.type == IntentType.TOUCH_TARGET:
-            if bool(observation.metadata.get("touch_calibrated", False)):
+            touch_plan = self.touch_planner.plan(observation)
+            plan_metadata = {
+                "touch_plan_status": touch_plan.status.value,
+                "touch_prerequisites": ",".join(touch_plan.prerequisites),
+            }
+            if touch_plan.ready and bool(observation.metadata.get("touch_calibrated", False)):
                 return ControlCommand(
                     name="guarded_touch",
                     parameters={
                         "target": observation.target,
-                        "estimated_depth_m": observation.metadata.get("estimated_depth_m"),
+                        "estimated_depth_m": touch_plan.estimated_depth_m,
                         "duration_s": self.safety.max_action_duration_s,
+                        **plan_metadata,
                     },
                     dry_run=self.safety.dry_run,
                     reason="Touch plan is ready but remains dry-run unless live mode is intentionally enabled.",
@@ -62,9 +70,10 @@ class DryRunControlAgent:
                     "target": observation.target,
                     "requires_calibration": True,
                     "duration_s": 0.0,
+                    **plan_metadata,
                 },
                 dry_run=True,
-                reason="Touch is blocked until calibration and guarded motion are implemented.",
+                reason=touch_plan.reason,
             )
 
         if intent.type == IntentType.DESCRIBE_SCENE:
