@@ -21,6 +21,17 @@ class DryRunControlAgent:
 
         if intent.type == IntentType.TRACK_TARGET:
             offset_x = float(observation.metadata.get("offset_x_norm", 0.0))
+            if abs(offset_x) <= self.safety.tracking_deadband_norm:
+                return ControlCommand(
+                    name="hold_target",
+                    parameters={
+                        "target": observation.target,
+                        "theta.vel": 0.0,
+                        "duration_s": 0.0,
+                    },
+                    dry_run=self.safety.dry_run,
+                    reason="Target is inside the tracking deadband.",
+                )
             theta = _clip(-offset_x * self.safety.max_angular_speed_dps, self.safety.max_angular_speed_dps)
             return ControlCommand(
                 name="center_target",
@@ -34,6 +45,17 @@ class DryRunControlAgent:
             )
 
         if intent.type == IntentType.TOUCH_TARGET:
+            if bool(observation.metadata.get("touch_calibrated", False)):
+                return ControlCommand(
+                    name="guarded_touch",
+                    parameters={
+                        "target": observation.target,
+                        "estimated_depth_m": observation.metadata.get("estimated_depth_m"),
+                        "duration_s": self.safety.max_action_duration_s,
+                    },
+                    dry_run=self.safety.dry_run,
+                    reason="Touch plan is ready but remains dry-run unless live mode is intentionally enabled.",
+                )
             return ControlCommand(
                 name="prepare_touch",
                 parameters={
@@ -63,4 +85,3 @@ class DryRunControlAgent:
 
 def _clip(value: float, limit: float) -> float:
     return max(-limit, min(limit, value))
-

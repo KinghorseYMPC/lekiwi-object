@@ -31,17 +31,19 @@ The initial skeleton is intentionally conservative:
 
 - `lekiwi_object.workflow` coordinates agents.
 - `lekiwi_object.agents.voice_agent` parses text commands as the first local stand-in for speech.
-- `lekiwi_object.agents.vision_agent` provides simulated scene observations, with room for camera/VLM backends.
+- `lekiwi_object.simulation` provides an offline world for multi-step tracking tests.
+- `lekiwi_object.agents.vision_agent` reads simulated observations, with room for camera/VLM backends.
 - `lekiwi_object.agents.control_agent` maps intents to safe dry-run control commands.
+- `lekiwi_object.backends` records dry-run commands locally and blocks live execution in offline mode.
 - `lekiwi_object.tools.check_ssh` verifies Raspberry Pi SSH reachability without storing credentials.
 
 ## Suggested Development Stages
 
 1. Stage 0: repository hygiene, docs, local dry-run workflow.
-2. Stage 1: SSH and LeKiwi host startup checklist.
-3. Stage 2: local text command workflow with real LeKiwi observation stream.
-4. Stage 3: microphone ASR and TTS.
-5. Stage 4: visual recognition and target tracking.
-6. Stage 5: safe object touch primitive.
-7. Stage 6: demo polish and robustness.
-
+2. Stage 1: offline simulator, safety backend, and closed-loop tests.
+3. Stage 2: SSH and LeKiwi host startup checklist.
+4. Stage 3: local text command workflow with real LeKiwi observation stream.
+5. Stage 4: microphone ASR and TTS.
+6. Stage 5: visual recognition and target tracking.
+7. Stage 6: safe object touch primitive.
+8. Stage 7: demo polish and robustness.

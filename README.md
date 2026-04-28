@@ -17,8 +17,9 @@ Implemented in this initial stage:
 - project docs for future Codex sessions;
 - local multi-agent workflow skeleton;
 - fuzzy text intent routing for Chinese commands;
-- simulated vision observations;
+- simulated vision observations and a multi-step offline world;
 - dry-run control command generation;
+- dry-run robot backend that records commands without SSH or robot motion;
 - SSH reachability checker for the Raspberry Pi;
 - project-level git setup plan.
 
@@ -40,6 +41,14 @@ python -m lekiwi_object.cli --text "碰一下那个开关" --dry-run
 ```
 
 Expected behavior: the CLI prints a parsed intent, a vision observation, a dry-run control command, and a Chinese response.
+
+Run a local closed-loop tracking simulation:
+
+```bash
+python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6
+```
+
+Expected behavior: each step observes the simulated target, emits a safe centering command, records it locally, and updates the offline world so the target moves toward the image center.
 
 ## Raspberry Pi SSH Check
 
@@ -79,6 +88,25 @@ The laptop should do heavier logic:
 
 This matches the existing LeRobot LeKiwi pattern in the parent repository: Raspberry Pi host plus laptop client over ZMQ.
 
+## Offline Development Boundary
+
+This repository can make useful progress without real SSH:
+
+- intent parsing;
+- workflow state and task routing;
+- simulated scene recognition;
+- simulated target tracking;
+- safety rules and dry-run command execution;
+- tests and GitHub collaboration.
+
+Real SSH or hardware is still required for:
+
+- confirming `rasberrypi16.local` is reachable;
+- starting the LeKiwi host process on the Pi;
+- receiving real camera frames;
+- verifying motor IDs, directions, limits, and latency;
+- validating any physical touch behavior.
+
 ## GitHub Setup
 
 This project folder is managed as its own git repository.
@@ -105,10 +133,10 @@ python -m lekiwi_object.cli --text "看一下桌面" --dry-run
 ## Suggested Roadmap
 
 1. Stage 0: dry-run workflow and repository hygiene.
-2. Stage 1: SSH check and documented Pi host startup.
-3. Stage 2: LeKiwi client observation stream on laptop.
-4. Stage 3: microphone ASR and TTS.
-5. Stage 4: visual recognition and target tracking.
-6. Stage 5: cautious object-touch primitive.
-7. Stage 6: demo script, logging, and robustness pass.
-
+2. Stage 1: offline simulator, safety backend, and closed-loop tests.
+3. Stage 2: SSH check and documented Pi host startup.
+4. Stage 3: LeKiwi client observation stream on laptop.
+5. Stage 4: microphone ASR and TTS.
+6. Stage 5: visual recognition and target tracking.
+7. Stage 6: cautious object-touch primitive.
+8. Stage 7: demo script, logging, and robustness pass.

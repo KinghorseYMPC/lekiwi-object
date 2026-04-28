@@ -44,5 +44,17 @@ class WorkflowResult:
     intent: Intent
     observation: VisionObservation
     command: ControlCommand
+    execution: Any
     response: str
+    step_index: int = 0
 
+
+@dataclass(frozen=True)
+class WorkflowTrace:
+    results: list[WorkflowResult]
+
+    @property
+    def final(self) -> WorkflowResult:
+        if not self.results:
+            raise ValueError("WorkflowTrace has no results.")
+        return self.results[-1]

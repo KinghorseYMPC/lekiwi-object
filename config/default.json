@@ -17,6 +17,11 @@
   },
   "voice": {
     "backend": "text"
+  },
+  "simulation": {
+    "image_width": 640,
+    "image_height": 480,
+    "tracking_response_gain": 0.12,
+    "touch_calibrated": false
   }
 }
-

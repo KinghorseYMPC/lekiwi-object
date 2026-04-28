@@ -1,16 +1,21 @@
 from __future__ import annotations
 
 from lekiwi_object.config import VisionConfig
+from lekiwi_object.simulation import OfflineWorld
 from lekiwi_object.models import Intent, IntentType, VisionObservation
 
 
 class SimulatedVisionAgent:
     """A deterministic vision backend for laptop-only workflow testing."""
 
-    def __init__(self, config: VisionConfig):
+    def __init__(self, config: VisionConfig, world: OfflineWorld | None = None):
         self.config = config
+        self.world = world
 
     def observe(self, intent: Intent) -> VisionObservation:
+        if self.world is not None:
+            return self.world.observe(intent, self.config.default_target)
+
         target = intent.target or self.config.default_target
 
         if intent.type == IntentType.DESCRIBE_SCENE:
@@ -46,4 +51,3 @@ class SimulatedVisionAgent:
             confidence=0.0,
             metadata={"backend": self.config.backend},
         )
-

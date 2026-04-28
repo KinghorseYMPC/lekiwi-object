@@ -12,6 +12,7 @@ When starting a new session:
 
 ```bash
 python -m lekiwi_object.cli --text "看一下桌面" --dry-run
+python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6
 ```
 
 ## Skill: Safe Robot Work
@@ -23,6 +24,22 @@ Before any live robot command:
 3. Confirm the Raspberry Pi host process is running.
 4. Confirm `--dry-run` is not being removed accidentally.
 5. Use short durations and low speed first.
+
+## Skill: Offline Simulation
+
+Use this while SSH or hardware is unavailable:
+
+```bash
+python -m lekiwi_object.cli --text "看我的电脑屏幕" --dry-run --steps 6
+python -m lekiwi_object.cli --text "碰一下那个开关" --dry-run --json
+python -m pytest -q -p no:cacheprovider
+```
+
+Expected result:
+
+- tracking offsets shrink over multiple steps;
+- touch commands remain blocked unless calibration is explicitly modeled;
+- execution backend is `dry_run`, meaning no SSH and no robot motion.
 
 ## Skill: Raspberry Pi SSH Check
 
@@ -57,4 +74,3 @@ When publishing:
 2. Add it as `origin`.
 3. Push the local `main` branch.
 4. Ask colleagues to clone it and start from `README.md` plus `AGENTS.md`.
-
